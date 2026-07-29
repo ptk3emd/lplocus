@@ -1,0 +1,131 @@
+/* Locus Medicina - Design Tokens "O Caderno Clínico Pastel" */
+
+:root {
+  /* Typography */
+  --font-display: 'Urbanist', system-ui, -apple-system, sans-serif;
+  --font-body: 'Urbanist', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Light Theme Colors */
+  --ink: #212121;
+  --ink-soft: #4b4b50;
+  --muted: #6f6f78;
+  --line: #ececf2;
+  --bg: #f4f4f7;
+  --paper: #ffffff;
+  --surface: #fbfbfd;
+  --surface-hover: #f1f1f6;
+  --track: #e0e0e0;
+  --row-hover: #f4f4ff;
+
+  /* Study Pastels */
+  --yellow: #FCFD76;
+  --yellow-deep: #eef05a;
+  --lav: #D7D7F4;
+  --lav-deep: #c5c5ef;
+  --salmon: #F8B7A2;
+  --peach: #fce8e2;
+  --sage: #e3efe6;
+  --sage-deep: #5fa777;
+  --mist: #eef0f8;
+  --cream: #fdf5e6;
+  --danger: #d6453f;
+  --danger-ink: #ffffff;
+
+  /* Accent Text Overlay Colors */
+  --ink-on-accent: #212121;
+  --ink-on-accent-soft: #4b4b50;
+
+  /* Scrims & Shadows */
+  --overlay-scrim: rgba(20, 20, 40, 0.45);
+  --shadow: 0 18px 40px -22px rgba(20, 20, 40, 0.28);
+  --shadow-soft: 0 10px 30px -18px rgba(20, 20, 40, 0.22);
+  --shadow-ambient: 0 18px 40px -22px rgba(20, 20, 40, 0.28);
+
+  /* Radius */
+  --radius-xs: 8px;
+  --radius-control: 10px;
+  --radius-icon: 11px;
+  --radius-lg: 12px;
+  --radius-form: 14px;
+  --radius-sm: 16px;
+  --radius-md: 20px;
+  --radius-card: 26px;
+  --radius-pill: 30px;
+  --radius-full: 999px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme Overrides (Eye-Care Pastels) */
+[data-theme="dark"] {
+  --ink: #e8e8ec;
+  --ink-soft: #c2c2c9;
+  --muted: #9a9aa3;
+  --line: #33333c;
+  --bg: #18181c;
+  --paper: #222228;
+  --surface: #1e1e24;
+  --surface-hover: #2a2a32;
+  --track: #3a3a44;
+  --row-hover: #222238;
+
+  --yellow: #514a19;
+  --yellow-deep: #665c20;
+  --lav: #35325f;
+  --lav-deep: #474182;
+  --salmon: #653a2c;
+  --peach: #4e362a;
+  --sage: #28342b;
+  --sage-deep: #5fa777;
+  --mist: #262733;
+  --cream: #403622;
+  --danger: #ff6b63;
+  --danger-ink: #18181c;
+
+  --ink-on-accent: #f1f1f5;
+  --ink-on-accent-soft: #c7c7d1;
+
+  --shadow-soft: 0 10px 30px -18px rgba(0, 0, 0, 0.45);
+  --shadow-ambient: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
+}
+
+/* Dyslexia font option */
+[data-font="dyslexic"] {
+  --font-display: 'OpenDyslexic', 'Urbanist', system-ui, sans-serif;
+  --font-body: 'OpenDyslexic', 'Urbanist', system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Helpers */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+mark.highlight {
+  background-color: var(--yellow);
+  color: inherit;
+  padding: 0.02em 0.25em;
+  border-radius: var(--radius-xs);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  font-weight: inherit;
+}
+
+/* Smooth Transition for theme toggles & interactive elements */
+body, button, input, a, mark, .transition-theme {
+  transition: background-color 0.2s var(--ease-standard), border-color 0.2s var(--ease-standard), color 0.2s var(--ease-standard);
+}

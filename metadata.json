@@ -1,0 +1,6 @@
+{
+  "name": "Locus Medicina — Página de Vendas e Plataforma",
+  "description": "Plataforma de estudos para estudantes de medicina com apostilas estruturadas, resumos sincronizados, questões e gestão de planos com desconto de renovação.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -5,10 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    // ⚠️ SUBSTITUA PELO NOME DO SEU REPOSITÓRIO:
-    // Exemplo: se o link do repositório for github.com/seunome/locus-medicina, use '/locus-medicina/'
-    base: 'Lplocus', 
-    // https://github.com/ptk3emd/lplocus
+    base: '/lplocus/', 
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

@@ -29,33 +29,18 @@
   --sage-deep: #5fa777;
   --mist: #eef0f8;
   --cream: #fdf5e6;
-  --danger: #d6453f;
-  --danger-ink: #ffffff;
   --success-accent: #3f8f61;
   --success-ink: #174d2f;
   --success-surface: #e3efe6;
   --success-border: #9bc4a8;
-  --warning-accent: #9a6700;
-  --warning-ink: #5f3d00;
-  --warning-surface: #fdf5e6;
-  --warning-border: #e4c77b;
-  --error-ink: #7f1d1d;
-  --error-surface: #fce8e2;
-  --error-border: #e5a79c;
   --info-accent: #5a5a9d;
-  --info-ink: #353568;
-  --info-surface: #eef0f8;
-  --info-border: #c5c5ef;
   --rating-accent: #a45c12;
-  --inverse-muted: #e4e4e7;
-  --email-canvas: #ffffff;
 
   /* Accent Text Overlay Colors */
   --ink-on-accent: #212121;
   --ink-on-accent-soft: #4b4b50;
 
   /* Scrims & Shadows */
-  --overlay-scrim: rgba(20, 20, 40, 0.45);
   --shadow: 0 18px 40px -22px rgba(20, 20, 40, 0.28);
   --shadow-soft: 0 10px 30px -18px rgba(20, 20, 40, 0.22);
   --shadow-ambient: 0 18px 40px -22px rgba(20, 20, 40, 0.28);

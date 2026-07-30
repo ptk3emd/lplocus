@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense } from "react";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 
@@ -7,7 +7,6 @@ const WhyItWorks = lazy(() => import("./components/WhyItWorks").then((module) =>
 const Testimonials = lazy(() => import("./components/Testimonials").then((module) => ({ default: module.Testimonials })));
 const Pricing = lazy(() => import("./components/Pricing").then((module) => ({ default: module.Pricing })));
 const FAQ = lazy(() => import("./components/FAQ").then((module) => ({ default: module.FAQ })));
-const EmailModal = lazy(() => import("./components/EmailModal").then((module) => ({ default: module.EmailModal })));
 
 const SectionSkeleton = () => (
   <div className="mx-auto flex min-h-[300px] max-w-7xl animate-pulse flex-col items-center justify-center px-4 py-16" aria-hidden="true">
@@ -17,14 +16,6 @@ const SectionSkeleton = () => (
 );
 
 export default function App() {
-  const [selectedPlanId, setSelectedPlanId] = useState("trimestral");
-  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
-
-  const handleOpenEmailPreview = (planId: string) => {
-    setSelectedPlanId(planId);
-    setIsEmailModalOpen(true);
-  };
-
   return (
     <div className="flex min-h-screen flex-col bg-[var(--bg)] font-body text-[var(--ink)]">
       <main className="flex-1">
@@ -43,23 +34,13 @@ export default function App() {
         </Suspense>
 
         <Suspense fallback={<SectionSkeleton />}>
-          <Pricing onOpenEmailPreview={handleOpenEmailPreview} />
+          <Pricing />
         </Suspense>
 
         <Suspense fallback={<SectionSkeleton />}>
           <FAQ />
         </Suspense>
       </main>
-
-      {isEmailModalOpen && (
-        <Suspense fallback={null}>
-          <EmailModal
-            isOpen={isEmailModalOpen}
-            onClose={() => setIsEmailModalOpen(false)}
-            selectedPlanId={selectedPlanId}
-          />
-        </Suspense>
-      )}
 
       <Footer />
     </div>

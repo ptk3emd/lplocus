@@ -12,14 +12,3 @@ export interface Plan {
   ctaText?: string;
   features: string[];
 }
-
-export interface EmailTemplateData {
-  receipt: {
-    subject: string;
-    html: string;
-  };
-  renewalNotice: {
-    subject: string;
-    html: string;
-  };
-}

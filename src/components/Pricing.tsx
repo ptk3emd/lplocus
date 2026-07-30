@@ -1,10 +1,6 @@
 import React from "react";
-import { ExternalLink, Mail, ShieldCheck, Sparkles } from "lucide-react";
+import { ExternalLink, ShieldCheck, Sparkles } from "lucide-react";
 import { MOCK_PLANS } from "../data/mockData";
-
-interface PricingProps {
-  onOpenEmailPreview: (planId: string) => void;
-}
 
 const planGuidance: Record<string, string> = {
   mensal: "Para experimentar sem compromisso.",
@@ -12,7 +8,7 @@ const planGuidance: Record<string, string> = {
   semestral: "Para quem quer cobrir o semestre inteiro."
 };
 
-export const Pricing: React.FC<PricingProps> = ({ onOpenEmailPreview }) => (
+export const Pricing: React.FC = () => (
   <section id="planos" className="mx-auto max-w-7xl border-t border-[var(--line)] px-4 py-16 scroll-mt-24 sm:px-6 sm:py-24 lg:px-8">
     <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
       <div className="mb-4 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-[var(--yellow)] px-3.5 py-1.5 text-xs font-extrabold tracking-wider text-[var(--ink-on-accent)] shadow-2xs">
@@ -61,15 +57,11 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenEmailPreview }) => (
       })}
     </div>
 
-    <div className="mt-8 grid gap-4 border-t border-[var(--line)] pt-8 sm:grid-cols-[1fr_auto] sm:items-center">
+    <div className="mt-8 border-t border-[var(--line)] pt-8">
       <div className="flex items-start gap-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--success-surface)] text-[var(--success-ink)]"><ShieldCheck className="h-5 w-5" /></span>
         <p className="text-sm font-medium leading-relaxed text-[var(--ink-soft)]"><span className="font-extrabold text-[var(--ink)]">7 dias de garantia.</span> Acesse, estude e peça reembolso pela Kiwify se não fizer sentido para sua rotina.</p>
       </div>
-      <button onClick={() => onOpenEmailPreview("trimestral")} className="flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-lg)] px-3 py-2 text-sm font-extrabold text-[var(--ink)] underline decoration-[var(--lav-deep)] decoration-2 underline-offset-4 hover:text-[var(--ink-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]">
-        <Mail className="h-4 w-4" />
-        Ver e-mail de renovação
-      </button>
     </div>
   </section>
 );

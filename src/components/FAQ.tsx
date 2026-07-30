@@ -59,7 +59,7 @@ export const FAQ: React.FC = () => {
                 <span>{faq.question}</span>
                 <ChevronDown
                   className={`w-5 h-5 text-[var(--muted)] shrink-0 transition-transform duration-200 ${
-                    isOpen ? "rotate-180 text-indigo-600" : ""
+                    isOpen ? "rotate-180 text-[var(--info-accent)]" : ""
                   }`}
                 />
               </button>

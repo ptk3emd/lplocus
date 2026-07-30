@@ -1,11 +1,7 @@
 import React from "react";
-import { BookMarked, BarChart3, FileText, HelpCircle, WifiOff, ArrowRight } from "lucide-react";
+import { BookMarked, BarChart3, FileText, HelpCircle, WifiOff } from "lucide-react";
 
-interface FeaturesProps {
-  onSelectFeature: (featureKey: string) => void;
-}
-
-export const Features: React.FC<FeaturesProps> = ({ onSelectFeature }) => {
+export const Features: React.FC = () => {
   const featureItems = [
     {
       key: "apostilas",
@@ -64,33 +60,17 @@ export const Features: React.FC<FeaturesProps> = ({ onSelectFeature }) => {
           return (
             <div
               key={item.key}
-              className="p-6 rounded-[var(--radius-card)] bg-[var(--paper)] border border-[var(--line)] flex flex-col justify-between hover:border-[var(--ink-soft)] transition-all group"
+              className="p-6 rounded-[var(--radius-card)] bg-[var(--paper)] border border-[var(--line)]"
             >
-              <div>
-                {/* Header Icon */}
-                <div className={`w-12 h-12 rounded-[var(--radius-icon)] ${item.accentBg} flex items-center justify-center mb-6`}>
-                  <Icon className="w-6 h-6 text-[var(--ink)]" />
-                </div>
-
-                {/* Title & Description */}
-                <h3 className="text-xl font-extrabold text-[var(--ink)] tracking-tight mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-sm font-medium text-[var(--ink-soft)] leading-relaxed">
-                  {item.description}
-                </p>
+              <div className={`w-12 h-12 rounded-[var(--radius-icon)] ${item.accentBg} flex items-center justify-center mb-6`}>
+                <Icon className="w-6 h-6 text-[var(--ink)]" />
               </div>
-
-              {/* Action Link */}
-              <div className="pt-6 mt-6 border-t border-[var(--line)]">
-                <button
-                  onClick={() => onSelectFeature(item.key)}
-                  className="text-xs font-extrabold text-[var(--ink)] group-hover:text-indigo-600 flex items-center gap-2 transition-colors cursor-pointer"
-                >
-                  <span>Testar na plataforma</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
+              <h3 className="text-xl font-extrabold text-[var(--ink)] tracking-tight mb-3">
+                {item.title}
+              </h3>
+              <p className="text-sm font-medium text-[var(--ink-soft)] leading-relaxed">
+                {item.description}
+              </p>
             </div>
           );
         })}
@@ -98,4 +78,3 @@ export const Features: React.FC<FeaturesProps> = ({ onSelectFeature }) => {
     </section>
   );
 };
-

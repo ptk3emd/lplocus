@@ -31,6 +31,24 @@
   --cream: #fdf5e6;
   --danger: #d6453f;
   --danger-ink: #ffffff;
+  --success-accent: #3f8f61;
+  --success-ink: #174d2f;
+  --success-surface: #e3efe6;
+  --success-border: #9bc4a8;
+  --warning-accent: #9a6700;
+  --warning-ink: #5f3d00;
+  --warning-surface: #fdf5e6;
+  --warning-border: #e4c77b;
+  --error-ink: #7f1d1d;
+  --error-surface: #fce8e2;
+  --error-border: #e5a79c;
+  --info-accent: #5a5a9d;
+  --info-ink: #353568;
+  --info-surface: #eef0f8;
+  --info-border: #c5c5ef;
+  --rating-accent: #a45c12;
+  --inverse-muted: #e4e4e7;
+  --email-canvas: #ffffff;
 
   /* Accent Text Overlay Colors */
   --ink-on-accent: #212121;
@@ -58,45 +76,6 @@
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Theme Overrides (Eye-Care Pastels) */
-[data-theme="dark"] {
-  --ink: #e8e8ec;
-  --ink-soft: #c2c2c9;
-  --muted: #9a9aa3;
-  --line: #33333c;
-  --bg: #18181c;
-  --paper: #222228;
-  --surface: #1e1e24;
-  --surface-hover: #2a2a32;
-  --track: #3a3a44;
-  --row-hover: #222238;
-
-  --yellow: #514a19;
-  --yellow-deep: #665c20;
-  --lav: #35325f;
-  --lav-deep: #474182;
-  --salmon: #653a2c;
-  --peach: #4e362a;
-  --sage: #28342b;
-  --sage-deep: #5fa777;
-  --mist: #262733;
-  --cream: #403622;
-  --danger: #ff6b63;
-  --danger-ink: #18181c;
-
-  --ink-on-accent: #f1f1f5;
-  --ink-on-accent-soft: #c7c7d1;
-
-  --shadow-soft: 0 10px 30px -18px rgba(0, 0, 0, 0.45);
-  --shadow-ambient: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
-}
-
-/* Dyslexia font option */
-[data-font="dyslexic"] {
-  --font-display: 'OpenDyslexic', 'Urbanist', system-ui, sans-serif;
-  --font-body: 'OpenDyslexic', 'Urbanist', system-ui, sans-serif;
-}
-
 body {
   font-family: var(--font-body);
   background-color: var(--bg);
@@ -104,6 +83,18 @@ body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Consistent keyboard focus across the landing page */
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  :where(button, a, input, textarea, select):focus-visible {
+    outline-color: CanvasText;
+  }
 }
 
 /* Typography Helpers */
@@ -126,6 +117,6 @@ mark.highlight {
 }
 
 /* Smooth Transition for theme toggles & interactive elements */
-body, button, input, a, mark, .transition-theme {
+body, button, input, a, mark {
   transition: background-color 0.2s var(--ease-standard), border-color 0.2s var(--ease-standard), color 0.2s var(--ease-standard);
 }

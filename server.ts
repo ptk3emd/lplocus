@@ -66,75 +66,9 @@ const PLANS_CONFIG = {
   }
 };
 
-// Helper to format currency
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-  }).format(value);
-}
-
 // API Health Check
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "Locus Medicina Server", timestamp: new Date().toISOString() });
-});
-
-// API: Calculate Renewal Schedule Automatically
-app.post("/api/renewals/calculate", (req, res) => {
-  const { planId = "trimestral", startDate = new Date().toISOString() } = req.body;
-  const config = PLANS_CONFIG[planId as keyof typeof PLANS_CONFIG] || PLANS_CONFIG.trimestral;
-
-  const start = new Date(startDate);
-  const renewalSchedule = [];
-
-  // 1st Charge (Discounted)
-  renewalSchedule.push({
-    cycle: 1,
-    date: start.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" }),
-    rawDate: start.toISOString(),
-    amount: config.firstMonthPrice,
-    formattedAmount: formatBRL(config.firstMonthPrice),
-    isFirstCycle: true,
-    note: `1º Ciclo (${config.name} com desconto de R$ ${config.discountAmount},00)`
-  });
-
-  // Calculate 4 subsequent cycles
-  let currentDate = new Date(start);
-  let totalPaidInYear = config.firstMonthPrice;
-  let totalWithoutDiscount = config.standardPrice;
-
-  const cyclesToProject = Math.ceil(12 / config.intervalMonths) - 1;
-
-  for (let i = 1; i <= cyclesToProject; i++) {
-    currentDate.setMonth(currentDate.getMonth() + config.intervalMonths);
-    totalPaidInYear += config.standardPrice;
-    totalWithoutDiscount += config.standardPrice;
-
-    renewalSchedule.push({
-      cycle: i + 1,
-      date: currentDate.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" }),
-      rawDate: currentDate.toISOString(),
-      amount: config.standardPrice,
-      formattedAmount: formatBRL(config.standardPrice),
-      isFirstCycle: false,
-      note: `Renovação automática ${config.periodName} padrão`
-    });
-  }
-
-  const yearlySavings = config.discountAmount;
-
-  res.json({
-    plan: config,
-    schedule: renewalSchedule,
-    summary: {
-      firstCharge: formatBRL(config.firstMonthPrice),
-      recurringCharge: formatBRL(config.standardPrice),
-      billingFrequencyMonths: config.intervalMonths,
-      totalPaidFirstYear: formatBRL(totalPaidInYear),
-      yearlySavings: formatBRL(yearlySavings),
-      checkoutUrl: config.checkoutUrl
-    }
-  });
 });
 
 // API: Generate Email Templates for Billing and Renewal Notifications
@@ -142,7 +76,6 @@ app.post("/api/notifications/templates", (req, res) => {
   const { userEmail = "estudante@medicina.br", userName = "Futuro(a) Médico(a)", planId = "trimestral" } = req.body;
   const plan = PLANS_CONFIG[planId as keyof typeof PLANS_CONFIG] || PLANS_CONFIG.trimestral;
 
-  const today = new Date().toLocaleDateString("pt-BR");
   const nextRenewalDate = new Date();
   nextRenewalDate.setMonth(nextRenewalDate.getMonth() + plan.intervalMonths);
   const formattedNextDate = nextRenewalDate.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
@@ -217,31 +150,6 @@ app.post("/api/notifications/templates", (req, res) => {
   };
 
   res.json({ templates });
-});
-
-// API: Send Simulated Email Summary to User
-app.post("/api/notifications/send-summary", (req, res) => {
-  const { email, planId, name } = req.body;
-
-  if (!email || !email.includes("@")) {
-    return res.status(400).json({ error: "E-mail inválido fornecido." });
-  }
-
-  const plan = PLANS_CONFIG[planId as keyof typeof PLANS_CONFIG] || PLANS_CONFIG.trimestral;
-
-  res.json({
-    success: true,
-    message: `Resumo enviado com sucesso para ${email}!`,
-    details: {
-      recipient: email,
-      userName: name || "Estudante",
-      planName: plan.name,
-      firstCyclePrice: `R$ ${plan.firstMonthPrice},00`,
-      renewalPrice: `R$ ${plan.standardPrice},00`,
-      checkoutUrl: plan.checkoutUrl,
-      sentAt: new Date().toLocaleString("pt-BR")
-    }
-  });
 });
 
 // Serve frontend in production or via Vite in development

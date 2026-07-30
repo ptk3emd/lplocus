@@ -63,7 +63,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenEmailPreview }) => (
 
     <div className="mt-8 grid gap-4 border-t border-[var(--line)] pt-8 sm:grid-cols-[1fr_auto] sm:items-center">
       <div className="flex items-start gap-3">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--sage)] text-emerald-900"><ShieldCheck className="h-5 w-5" /></span>
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--success-surface)] text-[var(--success-ink)]"><ShieldCheck className="h-5 w-5" /></span>
         <p className="text-sm font-medium leading-relaxed text-[var(--ink-soft)]"><span className="font-extrabold text-[var(--ink)]">7 dias de garantia.</span> Acesse, estude e peça reembolso pela Kiwify se não fizer sentido para sua rotina.</p>
       </div>
       <button onClick={() => onOpenEmailPreview("trimestral")} className="flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-lg)] px-3 py-2 text-sm font-extrabold text-[var(--ink)] underline decoration-[var(--lav-deep)] decoration-2 underline-offset-4 hover:text-[var(--ink-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]">

@@ -55,7 +55,7 @@ export const Testimonials: React.FC = () => {
           >
             <div>
               {/* Stars */}
-              <div className="flex text-amber-500 mb-4">
+              <div className="flex text-[var(--rating-accent)] mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
@@ -75,7 +75,7 @@ export const Testimonials: React.FC = () => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5">
                   <h4 className="text-sm font-extrabold text-[var(--ink)] truncate">{t.name}</h4>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--success-accent)] shrink-0" />
                 </div>
                 <p className="text-xs font-semibold text-[var(--muted)] truncate">{t.detail}</p>
               </div>

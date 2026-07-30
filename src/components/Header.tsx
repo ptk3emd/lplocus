@@ -1,14 +1,14 @@
 import React from "react";
-import { BookOpen, Moon, Sun, Type, Sparkles, CheckCircle2, ShieldCheck } from "lucide-react";
+import { BookOpen, CheckCircle2, Moon, Sun, Type } from "lucide-react";
 
 interface HeaderProps {
-  currentTab: "landing" | "platform" | "calculator";
-  setCurrentTab: (tab: "landing" | "platform" | "calculator") => void;
+  currentTab: "landing" | "platform";
+  setCurrentTab: (tab: "landing" | "platform") => void;
   theme: "light" | "dark";
   toggleTheme: () => void;
   fontMode: "default" | "dyslexic";
   toggleFont: () => void;
-  onOpenEmailModal: () => void;
+  onSubscribe: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -18,145 +18,68 @@ export const Header: React.FC<HeaderProps> = ({
   toggleTheme,
   fontMode,
   toggleFont,
-  onOpenEmailModal,
-}) => {
-  return (
-    <header className="sticky top-0 z-50 bg-[var(--paper)] border-b border-[var(--line)] backdrop-blur-md bg-opacity-95 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-        
-        {/* Brand Logo & Tagline */}
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => setCurrentTab("landing")} 
-            className="flex items-center gap-2.5 text-left group focus:outline-none"
-          >
-            <div className="w-10 h-10 rounded-[var(--radius-icon)] bg-[var(--yellow)] flex items-center justify-center font-extrabold text-[var(--ink-on-accent)] shadow-sm group-hover:scale-105 transition-transform">
-              LM
-            </div>
-            <div>
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[var(--ink)] block leading-none">
-                Locus <span className="text-[var(--muted)] font-semibold text-sm">Medicina</span>
-              </span>
-              <span className="text-[11px] text-[var(--muted)] font-medium hidden md:block mt-0.5">
-                De estudantes de medicina para estudantes de medicina
-              </span>
-            </div>
-          </button>
-        </div>
+  onSubscribe,
+}) => (
+  <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[var(--paper)]/95 backdrop-blur-md transition-colors">
+    <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:gap-4 sm:px-6 lg:px-8">
+      <button
+        onClick={() => setCurrentTab("landing")}
+        className="group flex shrink-0 items-center gap-2.5 rounded-[var(--radius-icon)] text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]"
+        aria-label="Ir para a página inicial da Locus Medicina"
+      >
+        <span className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--yellow)] font-extrabold text-[var(--ink-on-accent)] shadow-sm transition-transform group-hover:scale-105">LM</span>
+        <span className="hidden sm:block">
+          <span className="block leading-none text-lg font-extrabold tracking-tight text-[var(--ink)]">Locus <span className="text-sm font-semibold text-[var(--muted)]">Medicina</span></span>
+          <span className="mt-0.5 hidden text-[11px] font-medium text-[var(--muted)] lg:block">De estudantes de medicina para estudantes de medicina</span>
+        </span>
+      </button>
 
-        {/* View Switcher Tabs */}
-        <nav className="hidden md:flex items-center gap-1 bg-[var(--bg)] p-1 rounded-[var(--radius-pill)] border border-[var(--line)]">
-          <button
-            onClick={() => setCurrentTab("landing")}
-            className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-bold transition-all ${
-              currentTab === "landing"
-                ? "bg-[var(--paper)] text-[var(--ink)] shadow-xs"
-                : "text-[var(--muted)] hover:text-[var(--ink)]"
-            }`}
-          >
-            Página de Vendas
-          </button>
-          <button
-            onClick={() => setCurrentTab("platform")}
-            className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-bold transition-all flex items-center gap-1.5 ${
-              currentTab === "platform"
-                ? "bg-[var(--paper)] text-[var(--ink)] shadow-xs"
-                : "text-[var(--muted)] hover:text-[var(--ink)]"
-            }`}
-          >
-            <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
-            Demonstração do App
-          </button>
-          <button
-            onClick={() => setCurrentTab("calculator")}
-            className={`px-3.5 py-1.5 rounded-[var(--radius-pill)] text-xs font-bold transition-all flex items-center gap-1.5 ${
-              currentTab === "calculator"
-                ? "bg-[var(--paper)] text-[var(--ink)] shadow-xs"
-                : "text-[var(--muted)] hover:text-[var(--ink)]"
-            }`}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            Renovação & Notificações
-          </button>
-        </nav>
-
-        {/* Actions & Utilities */}
-        <div className="flex items-center gap-2">
-          {/* Email Summary Preview Trigger */}
-          <button
-            onClick={onOpenEmailModal}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-[var(--radius-lg)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] border border-[var(--line)] text-xs font-bold text-[var(--ink)] transition-colors"
-            title="Ver preview do e-mail de notificação de cobrança e resumo"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-indigo-500" />
-            <span>Notificação e-mail</span>
-          </button>
-
-          {/* Font Toggle */}
-          <button
-            onClick={toggleFont}
-            className={`p-2 rounded-[var(--radius-icon)] border transition-colors ${
-              fontMode === "dyslexic"
-                ? "bg-[var(--lav)] text-[var(--ink-on-accent)] border-[var(--lav-deep)]"
-                : "bg-[var(--paper)] text-[var(--ink-soft)] border-[var(--line)] hover:bg-[var(--surface-hover)]"
-            }`}
-            title={fontMode === "dyslexic" ? "Fonte Padrão (Urbanist)" : "Fonte para Dislexia (OpenDyslexic)"}
-          >
-            <Type className="w-4 h-4" />
-          </button>
-
-          {/* Dark Mode Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-[var(--radius-icon)] bg-[var(--paper)] border border-[var(--line)] text-[var(--ink-soft)] hover:bg-[var(--surface-hover)] transition-colors"
-            title={theme === "light" ? "Ativar Modo Escuro (Proteção Ocular)" : "Ativar Modo Claro"}
-          >
-            {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-          </button>
-
-          {/* Primary CTA Button */}
-          <a
-            href="#planos"
-            onClick={(e) => {
-              if (currentTab !== "landing") {
-                setCurrentTab("landing");
-              }
-            }}
-            className="px-4 py-2 rounded-[var(--radius-lg)] bg-[var(--ink)] text-[var(--paper)] text-xs font-extrabold hover:opacity-90 transition-opacity shadow-xs flex items-center gap-1.5"
-          >
-            <span>Assinar Agora</span>
-            <CheckCircle2 className="w-3.5 h-3.5 text-[var(--yellow)]" />
-          </a>
-        </div>
-      </div>
-
-      {/* Mobile Nav Bar */}
-      <div className="md:hidden flex items-center justify-around bg-[var(--surface)] border-t border-[var(--line)] px-2 py-2">
-        <button
-          onClick={() => setCurrentTab("landing")}
-          className={`px-3 py-1 rounded-[var(--radius-pill)] text-xs font-bold ${
-            currentTab === "landing" ? "bg-[var(--yellow)] text-[var(--ink-on-accent)]" : "text-[var(--muted)]"
-          }`}
-        >
-          Landing
-        </button>
+      <nav className="hidden items-center md:flex" aria-label="Navegação principal">
         <button
           onClick={() => setCurrentTab("platform")}
-          className={`px-3 py-1 rounded-[var(--radius-pill)] text-xs font-bold ${
-            currentTab === "platform" ? "bg-[var(--yellow)] text-[var(--ink-on-accent)]" : "text-[var(--muted)]"
-          }`}
+          aria-current={currentTab === "platform" ? "page" : undefined}
+          className={`flex min-h-11 items-center gap-1.5 rounded-[var(--radius-pill)] px-3.5 py-2 text-xs font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)] ${currentTab === "platform" ? "bg-[var(--surface-hover)] text-[var(--ink)]" : "text-[var(--ink-soft)] hover:bg-[var(--surface)] hover:text-[var(--ink)]"}`}
         >
-          App Demo
+          <BookOpen className="h-3.5 w-3.5 text-emerald-600" />
+          Demonstração do App
+        </button>
+      </nav>
+
+      <div className="flex items-center justify-end gap-1.5 sm:gap-2">
+        <button
+          onClick={toggleFont}
+          aria-label={fontMode === "dyslexic" ? "Usar fonte padrão" : "Ativar fonte para dislexia"}
+          aria-pressed={fontMode === "dyslexic"}
+          className={`min-h-11 min-w-11 rounded-[var(--radius-icon)] border p-2 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)] ${fontMode === "dyslexic" ? "border-[var(--lav-deep)] bg-[var(--lav)] text-[var(--ink-on-accent)]" : "border-[var(--line)] bg-[var(--paper)] text-[var(--ink-soft)] hover:bg-[var(--surface-hover)]"}`}
+        >
+          <Type className="h-4 w-4" />
         </button>
         <button
-          onClick={() => setCurrentTab("calculator")}
-          className={`px-3 py-1 rounded-[var(--radius-pill)] text-xs font-bold ${
-            currentTab === "calculator" ? "bg-[var(--yellow)] text-[var(--ink-on-accent)]" : "text-[var(--muted)]"
-          }`}
+          onClick={toggleTheme}
+          aria-label={theme === "light" ? "Ativar modo escuro" : "Ativar modo claro"}
+          className="min-h-11 min-w-11 rounded-[var(--radius-icon)] border border-[var(--line)] bg-[var(--paper)] p-2 text-[var(--ink-soft)] transition-colors hover:bg-[var(--surface-hover)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]"
         >
-          Renovação
+          {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+        </button>
+        <button
+          onClick={onSubscribe}
+          className="flex min-h-11 items-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--ink)] px-3 py-2 text-xs font-extrabold text-[var(--paper)] shadow-xs transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)] sm:px-4"
+        >
+          <span>Assinar Agora</span>
+          <CheckCircle2 className="h-3.5 w-3.5 text-[var(--yellow)]" />
         </button>
       </div>
-    </header>
-  );
-};
+    </div>
+
+    <nav className="flex border-t border-[var(--line)] bg-[var(--surface)] px-4 md:hidden" aria-label="Navegação principal">
+      <button
+        onClick={() => setCurrentTab("platform")}
+        aria-current={currentTab === "platform" ? "page" : undefined}
+        className="flex min-h-11 items-center gap-2 text-xs font-bold text-[var(--ink-soft)] focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--ink)]"
+      >
+        <BookOpen className="h-4 w-4 text-emerald-600" />
+        Ver a demonstração
+      </button>
+    </nav>
+  </header>
+);

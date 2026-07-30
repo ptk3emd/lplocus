@@ -1,136 +1,75 @@
 import React from "react";
-import { Check, ShieldCheck, Sparkles, ExternalLink } from "lucide-react";
+import { ExternalLink, Mail, ShieldCheck, Sparkles } from "lucide-react";
 import { MOCK_PLANS } from "../data/mockData";
 
 interface PricingProps {
-  onSelectPlan?: (planId: string) => void;
+  onOpenEmailPreview: (planId: string) => void;
 }
 
-export const Pricing: React.FC<PricingProps> = () => {
-  return (
-    <section id="planos" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--line)]">
-      
-      {/* Section Header */}
-      <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[var(--radius-pill)] bg-[var(--yellow)] text-[var(--ink-on-accent)] font-extrabold text-xs uppercase tracking-wider mb-4 shadow-2xs">
-          <Sparkles className="w-3.5 h-3.5" />
-          Planos com Desconto Especial no 1º Mês
-        </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-[var(--ink)] tracking-tight text-balance">
-          Pronto para estudar como quem entende a sua realidade?
-        </h2>
-        <p className="mt-4 text-base sm:text-lg text-[var(--ink-soft)] font-medium">
-          Escolha o plano ideal para o seu momento no curso. Cancele quando quiser, sem letras miúdas.
-        </p>
-      </div>
-
-      {/* Pricing Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-        {MOCK_PLANS.map((plan) => {
-          const isPopular = plan.popular;
-          return (
-            <div
-              key={plan.id}
-              className={`rounded-[var(--radius-card)] bg-[var(--paper)] border flex flex-col justify-between p-6 relative transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ink-soft)] ${
-                isPopular
-                  ? "border-2 border-[var(--ink)] shadow-md ring-4 ring-[var(--yellow)]/30"
-                  : "border-[var(--line)] shadow-xs"
-              }`}
-            >
-              <div>
-                {/* Top Badge Row */}
-                <div className="mb-4 flex items-center justify-between gap-2 h-7">
-                  {isPopular ? (
-                    <span className="px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--yellow)] text-[var(--ink-on-accent)] font-extrabold text-xs tracking-wide">
-                      MAIS POPULAR
-                    </span>
-                  ) : (
-                    <span className="px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--surface)] text-[var(--ink-soft)] font-extrabold text-xs border border-[var(--line)]">
-                      {plan.badge}
-                    </span>
-                  )}
-                </div>
-
-                {/* Plan Name */}
-                <h3 className="text-2xl font-extrabold text-[var(--ink)] tracking-tight mb-3">
-                  {plan.name}
-                </h3>
-
-                {/* Price Display */}
-                <div className="mb-6 pb-6 border-b border-[var(--line)]">
-                  <div className="flex items-baseline flex-wrap gap-2">
-                    <span className="text-3xl sm:text-4xl font-extrabold text-[var(--ink)] tracking-tight whitespace-nowrap">
-                      <span className="text-xl sm:text-2xl font-bold mr-1">R$</span>
-                      {plan.firstMonthPrice}
-                    </span>
-                    <span className="text-xs sm:text-sm font-semibold text-[var(--muted)] whitespace-nowrap">
-                      / 1º mês
-                    </span>
-                  </div>
-
-                  <div className="mt-2 text-xs font-semibold text-[var(--ink-soft)] flex items-center gap-2">
-                    <span className="line-through text-[var(--muted)]">De R$ {plan.standardPrice}</span>
-                  </div>
-
-                  <p className="mt-3 text-xs text-[var(--muted)] font-medium leading-relaxed">
-                    {plan.intervalMonths === 1
-                      ? "Renovação por R$ 25,00/mês. Cancele quando quiser."
-                      : plan.intervalMonths === 3
-                      ? "Após o 1º mês, R$ 50,00 a cada 3 meses (~R$ 16,66/mês)."
-                      : "Após o 1º mês, R$ 90,00 a cada 6 meses (R$ 15,00/mês)."
-                    }
-                  </p>
-                </div>
-
-                {/* Features List */}
-                <ul className="space-y-3 mb-6">
-                  {plan.features.map((feat, i) => (
-                    <li key={i} className="flex items-start gap-3 text-xs sm:text-sm font-semibold text-[var(--ink-soft)]">
-                      <div className="w-5 h-5 rounded-full bg-[var(--sage)] flex items-center justify-center shrink-0 mt-0.5 text-emerald-900">
-                        <Check className="w-3 h-3" />
-                      </div>
-                      <span className="leading-snug">{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-6 border-t border-[var(--line)]">
-                {/* Kiwify Direct Checkout Button */}
-                <a
-                  href={plan.checkoutUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-full py-3.5 px-6 rounded-[var(--radius-lg)] font-extrabold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs ${
-                    isPopular
-                      ? "bg-[var(--ink)] text-[var(--paper)] hover:opacity-90"
-                      : "bg-[var(--yellow)] text-[var(--ink-on-accent)] hover:bg-[var(--yellow-deep)]"
-                  }`}
-                >
-                  <span>{plan.ctaText || "Assinar plano"}</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Guarantee & Security Banner */}
-      <div className="mt-10 p-6 rounded-[var(--radius-card)] bg-[var(--surface)] border border-[var(--line)] flex items-center gap-4">
-        <div className="w-12 h-12 rounded-[var(--radius-icon)] bg-[var(--sage)] flex items-center justify-center text-emerald-900 shrink-0">
-          <ShieldCheck className="w-6 h-6" />
-        </div>
-        <div>
-          <h4 className="text-base font-extrabold text-[var(--ink)]">Garantia Incondicional de 7 Dias</h4>
-          <p className="text-xs text-[var(--ink-soft)] font-medium leading-relaxed">
-            Acesse as apostilas, crie resumos e responda questões. Se você achar que não ajudou na sua rotina, peça 100% de reembolso na Kiwify sem nenhuma burocracia.
-          </p>
-        </div>
-      </div>
-
-    </section>
-  );
+const planGuidance: Record<string, string> = {
+  mensal: "Para experimentar sem compromisso.",
+  trimestral: "Para atravessar o próximo ciclo com previsibilidade.",
+  semestral: "Para quem quer cobrir o semestre inteiro."
 };
+
+export const Pricing: React.FC<PricingProps> = ({ onOpenEmailPreview }) => (
+  <section id="planos" className="mx-auto max-w-7xl border-t border-[var(--line)] px-4 py-16 scroll-mt-24 sm:px-6 sm:py-24 lg:px-8">
+    <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
+      <div className="mb-4 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-[var(--yellow)] px-3.5 py-1.5 text-xs font-extrabold tracking-wider text-[var(--ink-on-accent)] shadow-2xs">
+        <Sparkles className="h-3.5 w-3.5" />
+        Desconto especial no primeiro ciclo
+      </div>
+      <h2 className="text-balance text-3xl font-extrabold tracking-tight text-[var(--ink)] sm:text-5xl">Escolha o ritmo que cabe no seu semestre.</h2>
+      <p className="mt-4 text-base font-medium text-[var(--ink-soft)] sm:text-lg">Todos os planos incluem apostilas, questões comentadas, resumos pessoais e leitura offline parcial. Cancele quando quiser.</p>
+    </div>
+
+    <div className="grid items-stretch gap-6 md:grid-cols-3">
+      {MOCK_PLANS.map((plan) => {
+        const isPopular = plan.popular;
+        const monthlyEquivalent = (plan.standardPrice / plan.intervalMonths).toLocaleString("pt-BR", { minimumFractionDigits: 2 });
+
+        return (
+          <article key={plan.id} className={`relative flex flex-col rounded-[var(--radius-card)] border bg-[var(--paper)] p-6 ${isPopular ? "border-2 border-[var(--ink)] shadow-md" : "border-[var(--line)] shadow-xs"}`}>
+            <div className="min-h-8">
+              {isPopular && <span className="inline-flex rounded-[var(--radius-pill)] bg-[var(--yellow)] px-3 py-1 text-xs font-extrabold tracking-wide text-[var(--ink-on-accent)]">RECOMENDADO</span>}
+            </div>
+            <h3 className="mt-3 text-2xl font-extrabold tracking-tight text-[var(--ink)]">{plan.name}</h3>
+            <p className="mt-2 min-h-10 text-sm font-medium leading-relaxed text-[var(--ink-soft)]">{planGuidance[plan.id]}</p>
+
+            <div className="mt-6 border-y border-[var(--line)] py-5">
+              <p className="text-xs font-extrabold uppercase tracking-wider text-[var(--muted)]">Hoje</p>
+              <p className="mt-1 text-4xl font-extrabold tracking-tight text-[var(--ink)]"><span className="mr-1 text-xl">R$</span>{plan.firstMonthPrice}</p>
+              <p className="mt-1 text-xs font-medium text-[var(--muted)]">Primeiro ciclo · de R$ {plan.standardPrice}</p>
+            </div>
+
+            <div className="mt-5 space-y-1.5 text-sm">
+              <p className="font-extrabold text-[var(--ink)]">Depois: R$ {plan.standardPrice} a cada {plan.intervalMonths === 1 ? "mês" : `${plan.intervalMonths} meses`}</p>
+              <p className="font-medium text-[var(--ink-soft)]">Equivale a R$ {monthlyEquivalent}/mês</p>
+            </div>
+
+            <a
+              href={plan.checkoutUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`mt-7 flex min-h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-lg)] px-6 py-3.5 text-sm font-extrabold shadow-2xs transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)] ${isPopular ? "bg-[var(--ink)] text-[var(--paper)]" : "bg-[var(--yellow)] text-[var(--ink-on-accent)]"}`}
+            >
+              {plan.ctaText || "Assinar plano"}
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </article>
+        );
+      })}
+    </div>
+
+    <div className="mt-8 grid gap-4 border-t border-[var(--line)] pt-8 sm:grid-cols-[1fr_auto] sm:items-center">
+      <div className="flex items-start gap-3">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-icon)] bg-[var(--sage)] text-emerald-900"><ShieldCheck className="h-5 w-5" /></span>
+        <p className="text-sm font-medium leading-relaxed text-[var(--ink-soft)]"><span className="font-extrabold text-[var(--ink)]">7 dias de garantia.</span> Acesse, estude e peça reembolso pela Kiwify se não fizer sentido para sua rotina.</p>
+      </div>
+      <button onClick={() => onOpenEmailPreview("trimestral")} className="flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-lg)] px-3 py-2 text-sm font-extrabold text-[var(--ink)] underline decoration-[var(--lav-deep)] decoration-2 underline-offset-4 hover:text-[var(--ink-soft)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ink)]">
+        <Mail className="h-4 w-4" />
+        Ver e-mail de renovação
+      </button>
+    </div>
+  </section>
+);

@@ -51,7 +51,10 @@ export const FAQ: React.FC = () => {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full p-5 sm:p-6 text-left font-extrabold text-sm sm:text-base text-[var(--ink)] flex items-center justify-between gap-4 hover:bg-[var(--surface-hover)] transition-colors cursor-pointer"
+                aria-expanded={isOpen}
+                aria-controls={`faq-answer-${index}`}
+                id={`faq-question-${index}`}
+                className="w-full p-5 sm:p-6 text-left font-extrabold text-sm sm:text-base text-[var(--ink)] flex items-center justify-between gap-4 hover:bg-[var(--surface-hover)] transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--ink)]"
               >
                 <span>{faq.question}</span>
                 <ChevronDown
@@ -62,7 +65,7 @@ export const FAQ: React.FC = () => {
               </button>
 
               {isOpen && (
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6 text-xs sm:text-sm font-medium text-[var(--ink-soft)] leading-relaxed border-t border-[var(--line)]/50 pt-4 bg-[var(--surface)]/50">
+                <div id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`} className="px-5 pb-5 sm:px-6 sm:pb-6 text-xs sm:text-sm font-medium text-[var(--ink-soft)] leading-relaxed border-t border-[var(--line)]/50 pt-4 bg-[var(--surface)]/50">
                   {faq.answer}
                 </div>
               )}

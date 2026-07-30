@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
 import { Hero } from "./components/Hero";
 import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 
 // Lazy load below-the-fold and conditional components for LCP optimization & bundle splitting
 const Features = lazy(() => import("./components/Features").then(m => ({ default: m.Features })));
@@ -23,7 +24,7 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState<"landing" | "platform">("landing");
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [fontMode, setFontMode] = useState<"default" | "dyslexic">("default");
-  const [selectedPlanId] = useState<string>("trimestral");
+  const [selectedPlanId, setSelectedPlanId] = useState<string>("trimestral");
   const [initialFeature, setInitialFeature] = useState<string>("apostilas");
   const [isEmailModalOpen, setIsEmailModalOpen] = useState<boolean>(false);
 
@@ -34,8 +35,31 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleSubscribe = () => {
+    setCurrentTab("landing");
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        document.getElementById("planos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  };
+
+  const handleOpenEmailPreview = (planId: string) => {
+    setSelectedPlanId(planId);
+    setIsEmailModalOpen(true);
+  };
+
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col font-body transition-colors">
+    <div data-theme={theme} data-font={fontMode} className="min-h-screen bg-[var(--bg)] text-[var(--ink)] flex flex-col font-body transition-colors">
+      <Header
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+        theme={theme}
+        toggleTheme={() => setTheme(currentTheme => currentTheme === "light" ? "dark" : "light")}
+        fontMode={fontMode}
+        toggleFont={() => setFontMode(currentFont => currentFont === "default" ? "dyslexic" : "default")}
+        onSubscribe={handleSubscribe}
+      />
       
       {/* Main Content Area */}
       <main className="flex-1">
@@ -59,7 +83,7 @@ export default function App() {
             </Suspense>
 
             <Suspense fallback={<SectionSkeleton />}>
-              <Pricing />
+              <Pricing onOpenEmailPreview={handleOpenEmailPreview} />
             </Suspense>
 
             <Suspense fallback={<SectionSkeleton />}>
@@ -90,7 +114,7 @@ export default function App() {
             
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 mb-16">
               <Suspense fallback={<SectionSkeleton />}>
-                <Pricing />
+                <Pricing onOpenEmailPreview={handleOpenEmailPreview} />
               </Suspense>
             </div>
           </div>
@@ -115,4 +139,3 @@ export default function App() {
     </div>
   );
 }
-

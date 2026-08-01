@@ -1,10 +1,11 @@
 import React from "react";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import logoUrl from "../../mainlogo.svg";
 
 export const Hero: React.FC = () => (
   <section className="relative mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 md:pb-20 md:pt-24 lg:px-8">
     <div className="mx-auto max-w-4xl space-y-6 text-center">
-      <img src="/mainlogo.svg" alt="8Book — Locus Med" className="mx-auto h-auto w-32 sm:w-40" />
+      <img src={logoUrl} alt="8Book — Locus Med" className="mx-auto h-auto w-32 sm:w-40" />
       <span className="inline-flex rounded-[var(--radius-pill)] bg-[var(--lav)] px-3 py-1 text-xs font-extrabold tracking-wider text-[var(--ink)]">FEITO POR VETERANOS DO 8ºP</span>
       <h1 className="text-balance text-4xl font-extrabold leading-tight tracking-tight text-[var(--ink)] sm:text-5xl sm:leading-[1.15] md:text-6xl">Menos tempo procurando material. Mais direção para estudar Medicina.</h1>
       <p className="mx-auto max-w-2xl text-balance text-lg font-medium leading-relaxed text-[var(--ink-soft)] sm:text-xl">O 8Book, produto da Locus Med, reúne resumos, apostilas, questões e materiais de apoio organizados por veteranos do 8º período, em uma plataforma simples para estudar com mais clareza.</p>

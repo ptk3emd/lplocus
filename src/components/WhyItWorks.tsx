@@ -1,61 +1,12 @@
 import React from "react";
-import { GraduationCap, Clock, Flame, ShieldAlert, HeartPulse } from "lucide-react";
+import { Clock, Compass, GraduationCap, HeartPulse } from "lucide-react";
 
-export const WhyItWorks: React.FC = () => {
-  return (
-    <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--line)]">
-      <div className="max-w-4xl mx-auto">
-        
-        {/* Main Signature Container */}
-        <div className="p-8 sm:p-12 rounded-[var(--radius-card)] bg-[var(--paper)] border border-[var(--line)] shadow-xs relative overflow-hidden">
-          
-          {/* Kicker */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-pill)] bg-[var(--lav)] text-[var(--ink-on-accent)] font-extrabold text-xs uppercase tracking-wider mb-6">
-            <HeartPulse className="w-3.5 h-3.5" />
-            Nossa Proposta de Valor
-          </div>
+const reasons = [
+  { icon: Clock, title: "Menos tempo procurando", text: "Pare de perder horas caçando PDF solto em grupo." },
+  { icon: Compass, title: "Mais direção para revisar", text: "Conteúdo organizado para facilitar sua rotina de estudo." },
+  { icon: GraduationCap, title: "De aluno para aluno", text: "Feito por quem já passou pelo mesmo caminho." }
+];
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--ink)] tracking-tight mb-6">
-            Por que funciona?
-          </h2>
-
-          {/* Core Copy */}
-          <p className="text-lg sm:text-xl font-medium text-[var(--ink-soft)] leading-relaxed text-balance mb-8">
-            Porque foi construído por quem vive a rotina exaustiva do curso de medicina. A gente sabe que tempo é escasso e que o material precisa estar sempre à mão, limpo e confiável — nada de firulas, só o estudo direto que realmente rende.
-          </p>
-
-          {/* 3 Real-Life Use Contexts */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-[var(--line)]">
-            
-            <div className="p-4 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--line)]">
-              <div className="w-8 h-8 rounded-full bg-[var(--mist)] flex items-center justify-center text-[var(--ink)] mb-2">
-                <Clock className="w-4 h-4" />
-              </div>
-              <h4 className="text-sm font-extrabold text-[var(--ink)] mb-1">5 a 25 minutos livres</h4>
-              <p className="text-xs text-[var(--muted)]">Entre aulas, rondas de enfermagem e trocas de plantão.</p>
-            </div>
-
-            <div className="p-4 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--line)]">
-              <div className="w-8 h-8 rounded-full bg-[var(--peach)] flex items-center justify-center text-[var(--ink)] mb-2">
-                <Flame className="w-4 h-4" />
-              </div>
-              <h4 className="text-sm font-extrabold text-[var(--ink)]">Alta Carga Cognitiva</h4>
-              <p className="text-xs text-[var(--muted)]">Sem tempo para procurar PDFs perdidos em grupos de WhatsApp.</p>
-            </div>
-
-            <div className="p-4 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--line)]">
-              <div className="w-8 h-8 rounded-full bg-[var(--sage)] flex items-center justify-center text-[var(--ink)] mb-2">
-                <GraduationCap className="w-4 h-4" />
-              </div>
-              <h4 className="text-sm font-extrabold text-[var(--ink)]">Retenção de Longo Prazo</h4>
-              <p className="text-xs text-[var(--muted)]">Foco em fixar o raciocínio clínico para a prova e a prática.</p>
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-  );
-};
+export const WhyItWorks: React.FC = () => (
+  <section className="mx-auto max-w-7xl border-t border-[var(--line)] px-4 py-16 sm:px-6 sm:py-20 lg:px-8"><div className="mx-auto max-w-4xl rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--paper)] p-8 sm:p-12"><div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-[var(--lav)] px-3 py-1 text-xs font-extrabold tracking-wider text-[var(--ink)]"><HeartPulse className="h-3.5 w-3.5" aria-hidden="true" /> NOSSA PROPOSTA DE VALOR</div><h2 className="text-3xl font-extrabold tracking-tight text-[var(--ink)] sm:text-4xl">Por que funciona?</h2><div className="mt-6 max-w-3xl space-y-4 text-lg font-medium leading-relaxed text-[var(--ink-soft)]"><p>Porque foi construído por quem vive a rotina da Medicina por dentro.</p><p>Os materiais foram organizados por veteranos que já passaram por provas, seminários, ambulatórios, conteúdos extensos e aquela sensação de não saber por onde começar.</p><p>O 8Book não promete milagre. Ele entrega organização, direção e materiais de apoio para você estudar com menos caos.</p></div><div className="mt-10 grid gap-4 border-t border-[var(--line)] pt-6 sm:grid-cols-3">{reasons.map(({ icon: Icon, title, text }) => <div key={title}><Icon className="mb-3 h-5 w-5 text-[var(--info-accent)]" aria-hidden="true" /><h3 className="text-sm font-extrabold text-[var(--ink)]">{title}</h3><p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">{text}</p></div>)}</div></div></section>
+);

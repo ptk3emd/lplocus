@@ -1,80 +1,17 @@
 import React from "react";
 import { BookMarked, BarChart3, FileText, HelpCircle, WifiOff } from "lucide-react";
 
-export const Features: React.FC = () => {
-  const featureItems = [
-    {
-      key: "apostilas",
-      icon: BookMarked,
-      accentBg: "bg-[var(--lav)]",
-      title: "Apostilas Estruturadas",
-      description: "Conteúdo oficial organizado em blocos diretos, com tabelas e destaques cirúrgicos e clínicos para rápida absorção."
-    },
-    {
-      key: "progresso",
-      icon: BarChart3,
-      accentBg: "bg-[var(--sage)]",
-      title: "Progresso Visível",
-      description: "Acompanhe a porcentagem concluída por disciplina e mantenha a constância com mapa de frequência diária."
-    },
-    {
-      key: "resumos",
-      icon: FileText,
-      accentBg: "bg-[var(--yellow)]",
-      title: "Resumos Pessoais",
-      description: "Crie e edite seus apontamentos diretamente no capítulo. Adicione condutas e observações do preceptor sem se perder."
-    },
-    {
-      key: "questoes",
-      icon: HelpCircle,
-      accentBg: "bg-[var(--peach)]",
-      title: "Dúvidas e Questões",
-      description: "Pratique com questões por tema e gabarito comentado ao vivo, anotando pontos-chave no próprio ambiente."
-    },
-    {
-      key: "offline",
-      icon: WifiOff,
-      accentBg: "bg-[var(--mist)]",
-      title: "Leitura Offline",
-      description: "Apostilas abertas permanecem salvas em cache local para você continuar estudando em salas de espera e hospitais."
-    }
-  ];
+const featureItems = [
+  { icon: BookMarked, accent: "bg-[var(--lav)]", title: "Apostilas estruturadas", description: "Conteúdo organizado em blocos diretos, com linguagem clara e foco no que ajuda na revisão." },
+  { icon: FileText, accent: "bg-[var(--yellow)]", title: "Resumos por tema", description: "Materiais separados por assunto para você encontrar rápido o que precisa estudar." },
+  { icon: HelpCircle, accent: "bg-[var(--peach)]", title: "Dúvidas e questões", description: "Questões e pontos-chave para sair da leitura passiva e testar se realmente fixou." },
+  { icon: BarChart3, accent: "bg-[var(--sage)]", title: "Progresso visível", description: "Acompanhe sua evolução e tenha mais clareza do que já foi estudado." },
+  { icon: WifiOff, accent: "bg-[var(--mist)]", title: "Acesso em qualquer dispositivo", description: "Seu guia de estudos na palma da mão: revise pelo celular, tablet ou computador, onde der e quando precisar." }
+];
 
-  return (
-    <section id="como-funciona" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[var(--line)]">
-      
-      {/* Section Header */}
-      <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--ink)] tracking-tight">
-          Como funciona
-        </h2>
-        <p className="mt-3 text-base sm:text-lg text-[var(--ink-soft)] font-medium leading-relaxed">
-          Sem curva de aprendizado ou distrações. Apenas o essencial para transformar sua rotina médica de estudos.
-        </p>
-      </div>
-
-      {/* Grid of 5 Features - Balanced & Clean Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featureItems.map((item) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={item.key}
-              className="p-6 rounded-[var(--radius-card)] bg-[var(--paper)] border border-[var(--line)]"
-            >
-              <div className={`w-12 h-12 rounded-[var(--radius-icon)] ${item.accentBg} flex items-center justify-center mb-6`}>
-                <Icon className="w-6 h-6 text-[var(--ink)]" />
-              </div>
-              <h3 className="text-xl font-extrabold text-[var(--ink)] tracking-tight mb-3">
-                {item.title}
-              </h3>
-              <p className="text-sm font-medium text-[var(--ink-soft)] leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          );
-        })}
-      </div>
-    </section>
-  );
-};
+export const Features: React.FC = () => (
+  <section id="como-funciona" className="mx-auto max-w-7xl border-t border-[var(--line)] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+    <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16"><h2 className="text-3xl font-extrabold tracking-tight text-[var(--ink)] sm:text-4xl">Como funciona</h2><p className="mt-3 text-base font-medium leading-relaxed text-[var(--ink-soft)] sm:text-lg">Tudo em um lugar simples, para encontrar o que importa e seguir estudando.</p></div>
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">{featureItems.map(({ icon: Icon, accent, title, description }) => <article key={title} className="rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--paper)] p-6"><div className={`mb-6 flex h-12 w-12 items-center justify-center rounded-[var(--radius-icon)] ${accent}`}><Icon className="h-6 w-6 text-[var(--ink)]" aria-hidden="true" /></div><h3 className="mb-3 text-xl font-extrabold tracking-tight text-[var(--ink)]">{title}</h3><p className="text-sm font-medium leading-relaxed text-[var(--ink-soft)]">{description}</p></article>)}</div>
+  </section>
+);
